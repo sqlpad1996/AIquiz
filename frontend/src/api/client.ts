@@ -1,12 +1,6 @@
 import axios from 'axios';
 
-// Use custom API URL from environment if available
-// For Vercel/Netlify deployment scenarios
-const API_BASE_URL = process.env.REACT_APP_API_URL
-  ? process.env.REACT_APP_API_URL
-  : process.env.NODE_ENV === 'production' 
-    ? '' // For same-origin deployments like Heroku or Render
-    : 'http://localhost:5000';
+const API_BASE_URL = 'http://localhost:5000';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
