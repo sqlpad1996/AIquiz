@@ -16,19 +16,18 @@ app.use(express.urlencoded({ limit: '25mb', extended: true }));
 const authRoutes = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
-// Add after `authRoutes` in server.js
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/user', userRoutes);
 
 const quizRoutes = require('./routes/quizRoutes');
 app.use('/api/quiz', quizRoutes);
 
-
 // DB Connection & Server Start
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-        app.listen(5000, () => {
-            console.log('Server running on http://localhost:5000');
+        const PORT = process.env.PORT || 5000;
+        app.listen(PORT, '0.0.0.0', () => {
+            console.log(`Server running on port ${PORT}`);
         });
     })
     .catch(err => console.error('MongoDB Connection Error:', err));
